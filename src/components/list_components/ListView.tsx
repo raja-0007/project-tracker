@@ -9,7 +9,7 @@ import { getTaskDueDateMeta } from "../../utils/taskDates";
 type SortKey = "title" | "priority" | "dueDate";
 type SortOrder = "ascending" | "descending" | "none";
 
-const ROW_HEIGHT = 64; 
+const ROW_HEIGHT = 64;
 const BUFFER = 10;
 
 const EMPTY_FILTERS: Filters = {
@@ -81,26 +81,26 @@ const ListView = ({
     });
   }, [filteredTasks, sortConfig]);
 
-useEffect(() => {
-  const el = scrollRef.current;
-  if (!el) return;
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
 
-  const handleScroll = () => {
-    setScrollTop(el.scrollTop);
-  };
+    const handleScroll = () => {
+      setScrollTop(el.scrollTop);
+    };
 
-  el.addEventListener("scroll", handleScroll);
+    el.addEventListener("scroll", handleScroll);
 
-  const resizeObserver = new ResizeObserver(() => {
-    setContainerHeight(el.clientHeight);
-  });
-  resizeObserver.observe(el);
+    const resizeObserver = new ResizeObserver(() => {
+      setContainerHeight(el.clientHeight);
+    });
+    resizeObserver.observe(el);
 
-  return () => {
-    el.removeEventListener("scroll", handleScroll);
-    resizeObserver.disconnect();
-  };
-}, []);
+    return () => {
+      el.removeEventListener("scroll", handleScroll);
+      resizeObserver.disconnect();
+    };
+  }, []);
 
   const total = sortedTasks.length;
 
@@ -129,8 +129,8 @@ useEffect(() => {
             prev.order === "none"
               ? "ascending"
               : prev.order === "ascending"
-              ? "descending"
-              : "ascending",
+                ? "descending"
+                : "ascending",
         };
       }
       return { key, order: "ascending" };
@@ -141,23 +141,23 @@ useEffect(() => {
     <div className="w-full bg-slate-50 p-4 md:p-6">
       <div className="overflow-x-auto rounded-3xl border border-slate-200 bg-white shadow-sm">
         <div className="min-w-[980px]">
-          <div className="sticky top-0 z-10 flex border-b border-slate-200 bg-slate-100 text-sm font-semibold text-slate-700">
+          <div className="sticky top-0 z-10 flex border-b grid-cols-4 border-slate-200 bg-slate-100 text-sm font-semibold text-slate-700">
             <div
-              className="w-[280px] shrink-0 px-4 py-3 cursor-pointer"
+              className="min-w-[280px] flex-[2.1] px-4 py-3 cursor-pointer"
               onClick={() => toggleSort("title")}
             >
               Title
             </div>
-            <div className="w-[220px] shrink-0 px-4 py-3">Assignee</div>
+            <div className="min-w-[220px] flex-[1.5] px-4 py-3">Assignee</div>
             <div
-              className="w-[150px] shrink-0 px-4 py-3 cursor-pointer"
+              className="min-w-[150px] flex-[1] px-4 py-3 cursor-pointer"
               onClick={() => toggleSort("priority")}
             >
               Priority
             </div>
-            <div className="w-[190px] shrink-0 px-4 py-3">Status</div>
+            <div className="min-w-[190px] flex-[1.3] px-4 py-3">Status</div>
             <div
-              className="w-[140px] shrink-0 px-4 py-3 cursor-pointer"
+              className="min-w-[140px] flex-[1.1] px-4 py-3 cursor-pointer"
               onClick={() => toggleSort("dueDate")}
             >
               Due Date
@@ -168,55 +168,55 @@ useEffect(() => {
             ref={scrollRef}
             className="relative max-h-[calc(100vh-16rem)] overflow-auto"
           >
-        {total === 0 && (
-          <div className="flex min-h-72 items-center justify-center px-6 py-12">
-            <div className="max-w-md rounded-3xl border border-dashed border-slate-300 bg-white px-8 py-10 text-center shadow-sm">
-              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-100 text-2xl">
-                0
+            {total === 0 && (
+              <div className="flex min-h-72 items-center justify-center px-6 py-12">
+                <div className="max-w-md rounded-3xl border border-dashed border-slate-300 bg-white px-8 py-10 text-center shadow-sm">
+                  <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-100 text-2xl">
+                    0
+                  </div>
+                  <h3 className="text-lg font-semibold text-slate-900">
+                    No tasks match these filters
+                  </h3>
+                  <p className="mt-2 text-sm text-slate-500">
+                    Try widening the date range, status, or assignee to bring tasks back into view.
+                  </p>
+                  {hasActiveFilters && (
+                    <button
+                      onClick={() => setFilters(EMPTY_FILTERS)}
+                      className="mt-5 rounded-xl bg-slate-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-slate-700"
+                    >
+                      Clear filters
+                    </button>
+                  )}
+                </div>
               </div>
-              <h3 className="text-lg font-semibold text-slate-900">
-                No tasks match these filters
-              </h3>
-              <p className="mt-2 text-sm text-slate-500">
-                Try widening the date range, status, or assignee to bring tasks back into view.
-              </p>
-              {hasActiveFilters && (
-                <button
-                  onClick={() => setFilters(EMPTY_FILTERS)}
-                  className="mt-5 rounded-xl bg-slate-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-slate-700"
-                >
-                  Clear filters
-                </button>
-              )}
-            </div>
-          </div>
-        )}
-        <div
-          className="relative min-w-[980px]"
-          style={{ height: totalHeight, position: "relative" }}
-        >
-          {visibleTasks.map((task, index) => {
-            const actualIndex = from + index;
-            const { label, isOverdue } = getTaskDueDateMeta(task);
+            )}
+            <div
+              className="relative min-w-[980px] w-full"
+              style={{ height: totalHeight, position: "relative" }}
+            >
+              {visibleTasks.map((task, index) => {
+                const actualIndex = from + index;
+                const { label, isOverdue } = getTaskDueDateMeta(task);
 
-            return (
-              <ListViewRow
-                key={task.id}
-                task={task}
-                dueLabel={label}
-                isOverdue={isOverdue}
-                handleStatusChange={handleStatusChange}
-                style={{
-                  position: "absolute",
-                  top: actualIndex * ROW_HEIGHT,
-                  left: 0,
-                  right: 0,
-                  height: ROW_HEIGHT,
-                }}
-              />
-            );
-          })}
-        </div>
+                return (
+                  <ListViewRow
+                    key={task.id}
+                    task={task}
+                    dueLabel={label}
+                    isOverdue={isOverdue}
+                    handleStatusChange={handleStatusChange}
+                    style={{
+                      position: "absolute",
+                      top: actualIndex * ROW_HEIGHT,
+                      left: 0,
+                      right: 0,
+                      height: ROW_HEIGHT,
+                    }}
+                  />
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

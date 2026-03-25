@@ -33,15 +33,15 @@ const ListViewRow = forwardRef<HTMLDivElement, Props>(
       <div
         ref={ref}
         style={style} // 🔥 IMPORTANT (positioning)
-        className="flex min-w-[980px] items-center border-b border-slate-200 bg-white text-sm text-slate-700"
+        className="flex min-w-[980px] w-full items-center border-b border-slate-200 bg-white text-sm text-slate-700"
       >
         {/* Title */}
-        <div className="w-[280px] shrink-0 px-4 py-2.5 font-medium text-slate-900">
+        <div className="min-w-[280px] flex-[2.1] px-4 py-2.5 font-medium text-slate-900">
           {task.title}
         </div>
 
         {/* Assignee */}
-        <div className="w-[220px] shrink-0 px-4 py-2.5">
+        <div className="min-w-[220px] flex-[1.5] px-4 py-2.5">
           <div className="flex items-center gap-2">
             <Avatar
               text={task.assignee.name
@@ -56,12 +56,12 @@ const ListViewRow = forwardRef<HTMLDivElement, Props>(
         </div>
 
         {/* Priority */}
-        <div className="w-[150px] shrink-0 px-4 py-2.5">
+        <div className="min-w-[150px] flex-[1] px-4 py-2.5">
           <PriorityLabel priority={task.priority} />
         </div>
 
         {/* Status */}
-        <div className="w-[190px] shrink-0 px-4 py-2.5">
+        <div className="min-w-[190px] flex-[1.3] px-4 py-2.5">
           <Select
             options={statusOptions}
             className={variants[task.status] || variants["todo"]}
@@ -74,7 +74,7 @@ const ListViewRow = forwardRef<HTMLDivElement, Props>(
 
         {/* Due Date */}
         <div
-          className={`w-[140px] shrink-0 px-4 py-2.5 ${
+          className={`min-w-[140px] flex-[1.1] px-4 py-2.5 ${
             isOverdue ? "text-red-500" : ""
           }`}
         >

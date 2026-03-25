@@ -89,7 +89,7 @@ const moveToTomorrow = () => {
         <div className="w-full bg-slate-50 p-4 md:p-6">
             <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white p-4 shadow-sm">
             <ChartHeader moveToToday={moveToToday} moveToYesterday={moveToYesterday} moveToTomorrow={moveToTomorrow}/>
-            <div ref={containerRef} className="h-[32rem] w-full overflow-hidden md:h-[36rem]" />
+            <div ref={containerRef} className="h-[32rem] w-full overflow-hidden md:h-auto" />
             </div>
         </div>
     );

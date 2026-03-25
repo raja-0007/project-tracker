@@ -19,13 +19,13 @@ const Card = ({ children, className, varient }: props & { varient: Varient }) =>
     const cardRef = useRef<HTMLDivElement | null>(null);
 
     return (
-        <div ref={cardRef} onDragOver={(e)=>{e.preventDefault();handleDragOver(e, varient, cardRef)}} onDrop={(e)=>handleDrop(e, varient)} className={`min-h-[24rem] overflow-auto rounded-2xl shadow-md ${className} ${varients[varient] || varients['todo']}`}>
+        <div ref={cardRef} onDragOver={(e)=>{e.preventDefault();handleDragOver(e, varient, cardRef)}} onDrop={(e)=>handleDrop(e, varient)} className={`flex min-h-0 flex-col overflow-y-auto rounded-2xl shadow-md ${className} ${varients[varient] || varients['todo']}`}>
             {children}
         </div>
     )
 }
 
-const CardHeader = ({ title, varient }: { title: string, varient: Varient }) => {
+const CardHeader = ({ title, varient, count }: { title: string, varient: Varient, count?: number }) => {
     
     const varients = {
         'todo': 'text-blue-800 bg-blue-100',
@@ -34,15 +34,20 @@ const CardHeader = ({ title, varient }: { title: string, varient: Varient }) => 
         'done': 'text-green-800 bg-green-100',
     }
     return (
-        <div className={`flex items-center justify-between rounded-t-2xl p-3 px-4 ${varients[varient] || varients['todo']}`}>
-            <h2 className='text-lg font-bold'>{title}</h2>
+        <div className={`flex items-center sticky top-0 z-10 justify-between rounded-t-2xl p-3 px-4 ${varients[varient] || varients['todo']}`}>
+            <div className='flex items-center gap-3'>
+                <h2 className='text-lg font-bold'>{title}</h2>
+                <span className='inline-flex min-w-8 items-center justify-center rounded-full bg-white/80 px-2 py-0.5 text-sm font-semibold text-slate-700'>
+                    {count ?? 0}
+                </span>
+            </div>
         </div>
     )
 }
 
 const CardBody = ({ children }: { children: React.ReactNode }) => {
     return (
-        <div className='p-4'>
+        <div className='min-h-0 flex-1 p-4'>
             {children}
         </div>
     )

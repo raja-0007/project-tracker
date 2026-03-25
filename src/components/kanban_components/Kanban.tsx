@@ -75,7 +75,7 @@ const Kanban = ({filters, setFilters}: { filters: Filters; setFilters: React.Dis
     }, [activeUsers])
 
     return (
-        <div className='grid w-full grid-cols-1 gap-4 bg-slate-50 p-4 md:grid-cols-2 md:gap-5 md:p-6 xl:grid-cols-4'>
+        <div className='grid w-full grid-cols-1 gap-4 bg-slate-50 p-4 md:h-[calc(100vh-10rem)] md:grid-cols-2 md:grid-rows-[auto_minmax(0,1fr)_minmax(0,1fr)] md:gap-5 md:p-6 xl:h-[calc(100vh-6.5rem)] xl:grid-cols-4 xl:grid-rows-[auto_minmax(0,1fr)]'>
             <div
                 className='col-span-1 flex flex-col gap-4 rounded-3xl border border-slate-200 bg-white p-4 shadow-sm md:col-span-2 xl:col-span-4 xl:flex-row xl:items-center xl:justify-between'>
                 <div className='flex flex-wrap items-center gap-3'>
@@ -90,8 +90,8 @@ const Kanban = ({filters, setFilters}: { filters: Filters; setFilters: React.Dis
                 </div>
                 <FilterBar filters={filters} setFilters={setFilters} />
             </div>
-            <Card className='p-0' varient='todo'>
-                <CardHeader title='To Do' varient='todo' />
+            <Card className='min-h-0 p-0' varient='todo'>
+                <CardHeader title='To Do' varient='todo' count={todoTasks.length} />
                 <CardBody>
                     {todoTasks.length === 0 && <EmptyColumnState varient='todo' />}
                     {todoTasks.map(task => {
@@ -104,8 +104,8 @@ const Kanban = ({filters, setFilters}: { filters: Filters; setFilters: React.Dis
                     })}
                 </CardBody>
             </Card>
-            <Card className='p-0' varient='inprogress'>
-                <CardHeader title='In Progress' varient='inprogress' />
+            <Card className='min-h-0 p-0' varient='inprogress'>
+                <CardHeader title='In Progress' varient='inprogress' count={inProgressTasks.length} />
                 <CardBody>
                     {inProgressTasks.length === 0 && <EmptyColumnState varient='inprogress' />}
                     {inProgressTasks.map(task => {
@@ -118,8 +118,8 @@ const Kanban = ({filters, setFilters}: { filters: Filters; setFilters: React.Dis
                     })}
                 </CardBody>
             </Card>
-            <Card className='p-0' varient='inreview'>
-                <CardHeader title='In Review' varient='inreview' />
+            <Card className='min-h-0 p-0' varient='inreview'>
+                <CardHeader title='In Review' varient='inreview' count={inReviewTasks.length} />
                 <CardBody>
                     {inReviewTasks.length === 0 && <EmptyColumnState varient='inreview' />}
                     {inReviewTasks.map(task => {
@@ -132,8 +132,8 @@ const Kanban = ({filters, setFilters}: { filters: Filters; setFilters: React.Dis
                     })}
                 </CardBody>
             </Card>
-            <Card className='p-0' varient='done'>
-                <CardHeader title='Done' varient='done' />
+            <Card className='min-h-0 p-0' varient='done'>
+                <CardHeader title='Done' varient='done' count={doneTasks.length} />
                 <CardBody>
                     {doneTasks.length === 0 && <EmptyColumnState varient='done' />}
                     {doneTasks.map(task => {
