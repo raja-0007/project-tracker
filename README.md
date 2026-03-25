@@ -60,7 +60,8 @@ I liked this approach because it stayed lightweight and did not require another 
 
 ## Lighthouse Screenshot
 
-To be added.
+![Lighthouse score](./image.png)
+
 
 ## Explanation
 
