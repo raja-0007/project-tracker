@@ -2,6 +2,8 @@
 
 This is a small task management app with three views: Kanban, List, and Timeline. I built it with React, TypeScript, Vite, and Tailwind. The app includes filtering, drag and drop in the Kanban board, virtual scrolling in the list view, and seeded data so the UI can be tested with a larger dataset.
 
+> Live Demo: [https://project-tracker-seven-lime.vercel.app](https://project-tracker-seven-lime.vercel.app)
+
 ## Setup
 
 1. Open the project folder:
